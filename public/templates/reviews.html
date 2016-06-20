@@ -1,0 +1,38 @@
+<div class="page-header">
+    <h1>Reviews</h1>
+</div>
+
+
+<div ng-repeat="review in reviews.review">
+  <div class="row">
+    <div class="col-md-1">
+      <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(review)"></span>
+      {{review.upvotes}}
+    </div>
+    <div class="col-md-11">
+    	<h4>{{review.title}}</h4>
+      <h5>Rating: {{review.rating}}</h5>
+    	<p>{{review.body}}</p>
+    	<p><b>Suggestion:</b> {{review.suggestion}}</p>
+      <p><b>Course Taken:</b>{{review.taken}}</p><hr>
+    </div>
+  </div>
+</div>
+
+<form ng-submit="addReview()" style="margin-top:30px;">
+  <h4>Post a Review</h4>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+  </div>
+  <div class="form-group">
+    <textarea type="text" class="form-control" placeholder="Review" ng-model="body"></textarea> 
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Suggestion" ng-model="suggestion"></input>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Course Taken" ng-model="taken"></input>
+  </div>
+  <button type="submit" class="btn btn-primary">Post</button>
+</form>

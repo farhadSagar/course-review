@@ -1,0 +1,22 @@
+<div class="page-header">
+    <h1>Depertments</h1>
+</div>
+
+
+<div ng-repeat="dept in depts">
+	<b>{{dept.name}}</b> - 
+	<span>
+		<a href="#/courses/{{$index}}">Courses</a> || 
+		<a href="#/faculties/{{$index}}">Faculties</a>
+	</span>
+</div>
+<hr>
+
+<form ng-submit="addDept()" style="margin-top:30px;">
+  <h4>Add a Depertment</h4>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Depertment Name" ng-model="name"></input>
+  </div>
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>

@@ -1,0 +1,34 @@
+<html>
+<head>
+  <title>ISU Course Review</title>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <style> .glyphicon-thumbs-up { cursor:pointer } </style>
+</head>
+<body ng-app="CourseReview">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <ui-view></ui-view>
+    </div>
+  </div>
+</body>
+
+<!-- Vendor -->
+  <script type="text/javascript" src="javascript/vendor/jquery-3.0.0.min.js"></script>
+  <script type="text/javascript" src="javascript/vendor/angular.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+
+<!-- App -->
+  <script src="javascript/angularApp.js"></script>
+  <script src="javascript/angularRoutes.js"></script>
+
+<!-- Services -->
+  <script src="javascript/services/posts.js"></script>
+  <script src="javascript/services/sharedid.js"></script>
+
+<!-- Controllers -->
+  <script src="/javascript/controllers/DepertmentController.js"></script>
+  <script src="/javascript/controllers/CoursesController.js"></script>
+  <script src="/javascript/controllers/FacultiesController.js"></script>
+  <script src="/javascript/controllers/ReviewsController.js"></script>
+
+</html>

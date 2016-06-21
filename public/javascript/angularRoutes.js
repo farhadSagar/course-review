@@ -14,7 +14,12 @@ angular.module('CourseReview').config(['$stateProvider', '$urlRouterProvider', f
 	.state('courses', {
 		url: '/courses/{id}',
 		templateUrl: '/templates/courses.html',
-		controller: 'CoursesCtrl'
+		controller: 'CoursesCtrl',
+		resolve: {
+			dept: ['$stateParams', 'posts', function($stateParams, posts){
+				return posts.getCourses($stateParams.id);
+			}]
+		}
 	})
 
 	.state('faculties', {
@@ -26,7 +31,12 @@ angular.module('CourseReview').config(['$stateProvider', '$urlRouterProvider', f
 	.state('reviews', {
 		url: '/reviews/{id}',
 		templateUrl: '/templates/reviews.html',
-		controller: 'ReviewsCtrl'
+		controller: 'ReviewsCtrl',
+		resolve: {
+			course: ['$stateParams', 'posts', function($stateParams, posts){
+				return posts.getReviews($stateParams.id);
+			}]
+		}
 	});
 
 	$urlRouterProvider.otherwise('home');

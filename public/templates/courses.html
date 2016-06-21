@@ -1,12 +1,12 @@
 <div class="page-header">
     <h1>Courses</h1>
 </div>
-{{courses.course[2].rating}}
+<b>Depertment: </b>{{courses.name}}
 
-<div ng-repeat="course in courses.course">
-	{{course.name}} - Rating: {{course.rating}} - 
+<div ng-repeat="course in courses.courses">
+	{{course.name}} - Rating: {{course.rating_avg}} - 
 	<span>
-		<a href="#/reviews/{{$index}}">Reviews</a> 
+		<a href="#/reviews/{{course._id}}">Reviews</a> 
 	</span>
 </div>
 <hr>

@@ -3,7 +3,7 @@
 </div>
 
 
-<div ng-repeat="dept in depts">
+<div ng-repeat="dept in depts | orderBy:'name'">
 	<b>{{dept.name}}</b> - 
 	<span>
 		<a href="#/courses/{{dept._id}}">Courses</a> || 

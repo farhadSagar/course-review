@@ -1,18 +1,17 @@
 angular.module('CourseReview')
-.controller('CoursesCtrl',['$scope', '$stateParams', 'posts', 'sharedId', function($scope, $stateParams, posts, sharedId){
+.controller('CoursesCtrl',['$scope', '$stateParams', 'posts', 'sharedId', 'dept', function($scope, $stateParams, posts, sharedId, dept){
 	
-	$scope.courses = posts.depts[$stateParams.id];
+	$scope.courses = dept;
 
 	$scope.deptId = sharedId.setId($stateParams.id);
 
 	$scope.addCourse = function(){
 		if(!$scope.name || $scope.name === ''){ return; }
-		$scope.courses.course.push({
+		posts.createCourses(dept._id, {
 			name: $scope.name,
-			rating: 3,
-			review: [
-				{title: 'Best Course Ever', body: 'Great Course, faculty was very good', suggestion: 'Have more quizes', taken: 'Spring 2016', upvotes: 2, rating: 4}
-			]
+			rating_avg: 3 //Hard coded rating for now, CHANGE LATER!!!!
+		}).success(function(course){
+			$scope.courses.courses.push(course);
 		});
 		$scope.name = '';
 	}

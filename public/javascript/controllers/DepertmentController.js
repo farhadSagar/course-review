@@ -7,11 +7,7 @@ angular.module('CourseReview')
 		if(!$scope.name || $scope.name === '') {return; }
 
 		posts.createDepts({
-			name: $scope.name,
-			course: [
-				{name: 'CS 303', rating_avg: 4},
-				{name: 'ENG 102', rating_avg: 5}
-			]
+			name: $scope.name
 		});
 
 		$scope.name = '';

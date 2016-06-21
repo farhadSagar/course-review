@@ -8,7 +8,8 @@ var mongoose = require('mongoose');
 
 // Get moongose models/schema
 require('./models/Depts');
-require('./models/Courses')
+require('./models/Courses');
+require('./models/Reviews');
 
 //Depelopment Mongo COnnection
 // mongoose.connect('mongodb://localhost/coursereview');

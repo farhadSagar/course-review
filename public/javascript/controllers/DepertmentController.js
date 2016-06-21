@@ -6,11 +6,11 @@ angular.module('CourseReview')
 	$scope.addDept = function(){
 		if(!$scope.name || $scope.name === '') {return; }
 
-		$scope.depts.push({
+		posts.createDepts({
 			name: $scope.name,
 			course: [
-				{name: 'CS 303', rating: 4},
-				{name: 'ENG 102', rating: 5}
+				{name: 'CS 303', rating_avg: 4},
+				{name: 'ENG 102', rating_avg: 5}
 			]
 		});
 

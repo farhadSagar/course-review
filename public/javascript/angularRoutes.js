@@ -4,12 +4,17 @@ angular.module('CourseReview').config(['$stateProvider', '$urlRouterProvider', f
 		url:'/home',
 		templateUrl: '/templates/depertments.html',
 		controller: 'DepertmentCtrl',
+		resolve: {
+			deptPromise: ['posts', function(posts){
+				return posts.getDepts();
+			}]
+		}
 	})
 
 	.state('courses', {
 		url: '/courses/{id}',
 		templateUrl: '/templates/courses.html',
-		controller: 'CoursesCtrl',
+		controller: 'CoursesCtrl'
 	})
 
 	.state('faculties', {

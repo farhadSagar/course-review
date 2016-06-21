@@ -4,11 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-/*var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
-//Setup Mongo COnnection
-mongoose.connect('mongodb://localhost/coursereview');
-*/
+// Get moongose models/schema
+require('./models/Depts');
+require('./models/Courses')
+
+//Depelopment Mongo COnnection
+// mongoose.connect('mongodb://localhost/coursereview');
+
+// Production Mongo Connection
+mongoose.connect('mongodb://course_review:bluedb1789@ds025782.mlab.com:25782/coursereview');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 

@@ -17,10 +17,10 @@ require('./models/Users');
 require('./config/passport');
 
 //Depelopment Mongo COnnection
-mongoose.connect('mongodb://localhost/coursereview');
+// mongoose.connect('mongodb://localhost/coursereview');
 
 // Production Mongo Connection
-// mongoose.connect('mongodb://course_review:bluedb1789@ds025782.mlab.com:25782/coursereview');
+mongoose.connect('mongodb://course_review:bluedb1789@ds025782.mlab.com:25782/coursereview');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');

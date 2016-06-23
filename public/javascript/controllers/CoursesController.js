@@ -1,7 +1,15 @@
 angular.module('CourseReview')
-.controller('CoursesCtrl',['$scope', '$stateParams', 'posts', 'sharedId', 'dept', function($scope, $stateParams, posts, sharedId, dept){
+.controller('CoursesCtrl',['$scope', '$stateParams', 'posts', 'sharedId', 'dept', 'auth', function($scope, $stateParams, posts, sharedId, dept, auth){
 	
 	$scope.courses = dept;
+
+	$scope.isLoggedIn = auth.isLoggedIn;
+
+	// Toggle Login
+	$scope.showLoginMessage = true;
+	$scope.toggleLogin = function(){
+		$scope.showLoginMessage = $scope.showLoginMessage === false ? true: false;
+	};
 
 	$scope.deptId = sharedId.setId($stateParams.id);
 

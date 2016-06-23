@@ -1,21 +1,40 @@
-<div class="page-header">
-    <h1>Courses</h1>
+<div class="page-header header">
+    <h2>Courses <span class="text-muted">- {{courses.name}}</span></h2>
 </div>
-<b>Depertment: </b>{{courses.name}}
-
-<div ng-repeat="course in courses.courses">
-	{{course.name}} - Rating: {{course.rating_avg}} - 
-	<span>
-		<a href="#/reviews/{{course._id}}">Reviews</a> 
-	</span>
-</div>
-<hr>
-
-<form ng-submit="addCourse()" style="margin-top:30px;">
-  <h4>Add a Course</h4>
-
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="Course Name" ng-model="name"></input>
+<div class="row">
+  <div class="col-sm-6">
+    <div ng-repeat="course in courses.courses | orderBy:'name'">
+    	<b class="course-name">{{course.name}}</b> - 
+    	<span>
+    		<a href="#/reviews/{{course._id}}">Reviews</a> 
+    	</span>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Add</button>
-</form>
+
+  <div class="col-sm-4 col-sm-offset-2">
+    <!-- Display adding Courses Form if logged in or else show this -->
+    <div ng-hide="isLoggedIn()">
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-3">
+          <button ng-click="toggleLogin()" class="btn btn-primary">Add a Course</button>
+        </div>
+        <div class="row">
+        <div class="col-sm-12">
+          <well class="well well-sm loginToggle" ng-hide="showLoginMessage">You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can add a Course.</well>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form for adding courses -->
+    <form ng-submit="addCourse()" style="margin-top:30px;" ng-show="isLoggedIn()">
+      <h4>Add a Course</h4>
+
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Course Name" ng-model="name"></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+  </div>
+</div><hr>
+

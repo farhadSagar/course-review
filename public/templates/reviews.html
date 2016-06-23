@@ -1,41 +1,43 @@
-<div class="page-header">
+<div class="page-header header">
     <h1>Reviews- <span class="text-muted">{{reviews.name}}</span></h1>
 </div>
 
 
 <div ng-repeat="review in reviews.reviews | orderBy:'-upvotes'">
   <div class="row">
-    <div class="col-md-1">
-      <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(review)"></span>
-      {{review.upvotes}}
+    <div class="col-md-2">
+      <button class="glyphicon glyphicon-thumbs-up like-button btn btn-default btn-sm" ng-click="incrementUpvotes(review)" ng-disabled="isDisabled(review)" ></button><span class="upvotes-like">{{review.upvotes}}</span>
+      
     </div>
-    <div class="col-md-11">
+    <div class="col-md-10">
     	<h4>{{review.title}} <small class="text-muted"> By- {{review.user}}</small></h4>
-      <h5>Rating: {{review.rating}}</h5>
+      <span class="rating-static rating-{{review.rating}}"></span>
     	<p>{{review.body}}</p>
     	<p><b>Suggestion:</b> {{review.suggestion}}</p>
-      <p><b>Course Taken:</b>{{review.taken}}</p><hr>
+      <p><b>Course Taken:</b> {{review.taken}}</p><hr>
     </div>
   </div>
 </div>
 
 <form ng-submit="addReview()" style="margin-top:30px;">
-  <h4>Post a Review</h4>
+  <h4>Post a Review <small>(Your name will remain anonymous!)</small></h4>
+  <div class="alert alert-danger" role="alert" ng-show="formValidation">Please fill all the field</div>
+
 
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+    <input type="text" class="form-control" placeholder="Title *" ng-model="title"></input>
   </div>
   <div class="form-group">
-    <input type="number" min="0" max="5" class="form-control" placeholder="Rating (out of 5) (Numbers Only)" ng-model="rating"></input>
+    <input type="number" min="0" max="5" class="form-control" placeholder="Rating * (out of 5) (Numbers Only)" ng-model="rating"></input>
   </div>
   <div class="form-group">
-    <textarea type="text" class="form-control" placeholder="Review" ng-model="body"></textarea> 
+    <textarea type="text" class="form-control" placeholder="Review *" ng-model="body"></textarea> 
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Suggestion" ng-model="suggestion"></input>
+    <input type="text" class="form-control" placeholder="Suggestion *" ng-model="suggestion"></input>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Course Taken" ng-model="taken"></input>
+    <input type="text" class="form-control" placeholder="Course Taken *" ng-model="taken"></input>
   </div>
   <button type="submit" class="btn btn-primary">Post</button>
 </form>

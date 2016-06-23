@@ -1,5 +1,5 @@
 angular.module('CourseReview')
-.factory('posts', ['$http', 'sharedId', function($http, sharedId){
+.factory('posts', ['$http', 'sharedId', 'auth', function($http, sharedId, auth){
 	var o = {
 		depts: []
 	};
@@ -11,7 +11,9 @@ angular.module('CourseReview')
 	};
 
 	o.createDepts = function(dept){
-		return $http.post('/depts', dept).success(function(data){
+		return $http.post('/depts', dept, {
+    		headers: {Authorization: 'Bearer '+auth.getToken()}
+  		}).success(function(data){
 			o.depts.push(data);
 		})
 	};
@@ -23,7 +25,9 @@ angular.module('CourseReview')
 	};
 
 	o.createCourses = function(id, course){
-		return $http.post('/courses/' + id + '/course', course);
+		return $http.post('/courses/' + id + '/course', course, {
+    		headers: {Authorization: 'Bearer '+auth.getToken()}
+  		});
 	};
 
 	o.getReviews = function(id){

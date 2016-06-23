@@ -5,17 +5,22 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
 
 // Get moongose models/schema
 require('./models/Depts');
 require('./models/Courses');
 require('./models/Reviews');
+require('./models/Users');
+
+// Require the passport configuration
+require('./config/passport');
 
 //Depelopment Mongo COnnection
-// mongoose.connect('mongodb://localhost/coursereview');
+mongoose.connect('mongodb://localhost/coursereview');
 
 // Production Mongo Connection
-mongoose.connect('mongodb://course_review:bluedb1789@ds025782.mlab.com:25782/coursereview');
+// mongoose.connect('mongodb://course_review:bluedb1789@ds025782.mlab.com:25782/coursereview');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -33,6 +38,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 app.use('/', routes);
 app.use('/users', users);

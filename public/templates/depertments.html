@@ -1,22 +1,42 @@
-<div class="page-header">
-    <h1>Depertments</h1>
+<div class="page-header header">
+    <h1>Departments</h1>
 </div>
 
-
-<div ng-repeat="dept in depts | orderBy:'name'">
-	<b>{{dept.name}}</b> - 
-	<span>
-		|| <a href="#/courses/{{dept._id}}">Courses</a> || 
-		<!-- <a href="#/faculties/{{$index}}">Faculties</a> -->
-	</span>
-</div>
-<hr>
-
-<form ng-submit="addDept()" style="margin-top:30px;">
-  <h4>Add a Depertment</h4>
-
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="Depertment Name" ng-model="name"></input>
+<div class="row">
+  <div class="col-sm-6">
+    <div ng-repeat="dept in depts | orderBy:'name'">
+      <b><a href="#/courses/{{dept._id}}" class="dept-name">{{dept.name}}</a></b>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Add</button>
-</form>
+
+  <div class="col-sm-4 col-sm-offset-2">
+    <!-- Display adding depertment Form if logged in or else show this -->
+    <div ng-hide="isLoggedIn()">
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-3">
+          <button ng-click="toggleLogin()" class="btn btn-primary">Add a Department</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <well class="well well-sm loginToggle" ng-hide="showLoginMessage">You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can add a Department.</well>
+        </div>
+      </div>
+    </div>
+
+      <!-- Form for adding depertment -->
+      <form ng-submit="addDept()" ng-show="isLoggedIn()">
+        <h4>Add a Depertment</h4>
+
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Depertment Name" ng-model="name" required></input>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+  </div>
+</div><hr>
+
+
+
+

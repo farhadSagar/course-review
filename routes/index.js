@@ -1,16 +1,22 @@
 var express = require('express');
+var jwt = require('express-jwt');
+var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 var router = express.Router();
-var mongoose = require('mongoose');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+var passport = require('passport');
+
+var mongoose = require('mongoose');
+
 // Mongo Models
 var Dept = mongoose.model('Dept');
 var Course = mongoose.model('Course');
 var Review = mongoose.model('Review');
+var User = mongoose.model('User');
 
 // Route for Getting all Depertments (Home page)
 router.get('/depts', function(req, res, next){
@@ -22,7 +28,7 @@ router.get('/depts', function(req, res, next){
 });
 
 // Route for posting new Depertment
-router.post('/depts', function(req, res, next){
+router.post('/depts', auth, function(req, res, next){
 	var dept = new Dept(req.body);
 
 	dept.save(function(err, dept){
@@ -56,7 +62,7 @@ router.get('/courses/:dept', function(req, res, next){
 });
 
 // Route for posting a courses
-router.post('/courses/:dept/course', function(req, res, next){
+router.post('/courses/:dept/course', auth, function(req, res, next){
 	var course = new Course(req.body);
 	course.dept = req.dept;
 
@@ -131,6 +137,43 @@ router.put('/courses/:dept/reviews/:course/ups/:review/upvote', function(req, re
 
 		res.json(review);
 	});
+});
+
+
+// Route for Registering
+router.post('/register', function(req, res, next){
+  if(!req.body.username || !req.body.password){
+    return res.status(400).json({message: 'Please fill out all fields'});
+  }
+
+  var user = new User();
+
+  user.username = req.body.username;
+
+  user.setPassword(req.body.password)
+
+  user.save(function (err){
+    if(err){ return next(err); }
+
+    return res.json({token: user.generateJWT()})
+  });
+});
+
+// Route for Login
+router.post('/login', function(req, res, next){
+  if(!req.body.username || !req.body.password){
+    return res.status(400).json({message: 'Please fill out all fields'});
+  }
+
+  passport.authenticate('local', function(err, user, info){
+    if(err){ return next(err); }
+
+    if(user){
+      return res.json({token: user.generateJWT()});
+    } else {
+      return res.status(401).json(info);
+    }
+  })(req, res, next);
 });
 
 module.exports = router;
